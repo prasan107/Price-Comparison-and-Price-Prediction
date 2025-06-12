@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Style */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            padding: 20px;
+        }
+
+        /* Container Style */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Heading */
+        h1 {
+            text-align: center;
+            color: #0066cc;
+            font-size: 32px;
+            margin-bottom: 40px;
+        }
+
+        /* Results Table Container */
+        .results-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        /* Individual Result Table */
+        .results-container .table-container {
+            width: 48%;
+        }
+
+        /* Table Style */
+        .results-container table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .results-container table th, .results-container table td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .results-container table th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .results-container table td {
+            background-color: #ffffff;
+        }
+
+        .results-container table img {
+            width: 120px;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        /* Price Styling */
+        .price {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        /* Button Styling */
+        .product-card a {
+            display: inline-block;
+            padding: 8px 16px;
+            margin-top: 10px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .product-card a:hover {
+            background-color: #0056b3;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .results-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .results-container .table-container {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Search Results</h1>
+
+        <div class="results-container">
+            <!-- Amazon Results Column -->
+            <div class="table-container">
+                <h2>Amazon Products</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in amazon_results %}
+                        <tr>
+                            <td>
+                                <img src="{{ product.image_url }}" alt="{{ product.product_name }}">
+                                <div>{{ product.product_name }}</div>
+                            </td>
+                            <td class="price">₹{{ product.price }}</td>
+                            <td>
+                                <a href="{{ product.product_url }}" target="_blank">View on Amazon</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Flipkart Results Column -->
+            <div class="table-container">
+                <h2>Flipkart Products</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in flipkart_results %}
+                        <tr>
+                            <td>
+                                <img src="{{ product.image_url }}" alt="{{ product.product_name }}">
+                                <div>{{ product.product_name }}</div>
+                            </td>
+                            <td class="price">₹{{ product.price }}</td>
+                            <td>
+                                <a href="{{ product.product_url }}" target="_blank">View on Flipkart</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
